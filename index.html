@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Croaziere de Vis — Smart Cruises România</title>
+  <meta name="description" content="Descoperă lumea cu croaziere de lux la prețuri exclusive. Alătură-te clubului Smart Cruises și navighează prin cele mai frumoase destinații ale lumii." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dark: #9a7530;
+      --navy: #0a1628;
+      --navy-mid: #112240;
+      --navy-light: #1d3461;
+      --white: #f8f6f1;
+      --text-muted: rgba(248,246,241,0.65);
+      --text-dim: rgba(248,246,241,0.4);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(10,22,40,0.92) 0%, transparent 100%);
+      backdrop-filter: blur(2px);
+      transition: background 0.4s;
+    }
+    nav.scrolled { background: rgba(10,22,40,0.97); }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--white); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 28px;
+      border: 1px solid var(--gold);
+      border-radius: 2px;
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1920&q=90');
+      background-size: cover;
+      background-position: center 40%;
+      transform: scale(1.05);
+      animation: heroZoom 12s ease-out forwards;
+      filter: brightness(0.75);
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1.05); }
+      to   { transform: scale(1.0); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(10,22,40,0.95) 0%,
+        rgba(10,22,40,0.45) 40%,
+        rgba(10,22,40,0.1) 70%,
+        transparent 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.4s ease forwards;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.65s ease forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.85s ease forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s 1.05s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 40px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(201,168,76,0.5);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid rgba(248,246,241,0.3);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      right: 48px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeUp 0.9s 1.4s ease forwards;
+    }
+    .hero-scroll span {
+      writing-mode: vertical-rl;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(201,168,76,0.2);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      padding: 32px 48px;
+    }
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .stat-item {}
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 6px;
+      display: block;
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 96px 48px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+    .section-body {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    /* ─── DESTINATIONS ─── */
+    .destinations { background: var(--navy); }
+    .dest-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .dest-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: 340px 280px;
+      gap: 16px;
+    }
+    .dest-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .dest-card:first-child {
+      grid-row: 1 / 3;
+    }
+    .dest-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+      filter: brightness(0.8);
+    }
+    .dest-card:hover img { transform: scale(1.06); filter: brightness(0.65); }
+    .dest-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,22,40,0.85) 0%, transparent 50%);
+      display: flex;
+      align-items: flex-end;
+      padding: 28px;
+    }
+    .dest-info {}
+    .dest-region {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .dest-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 300;
+      color: var(--white);
+      display: block;
+      line-height: 1.2;
+    }
+    .dest-card:first-child .dest-name { font-size: 2.4rem; }
+
+    /* ─── HOW IT WORKS ─── */
+    .how { background: var(--navy-mid); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 64px;
+    }
+    .step {
+      position: relative;
+      padding: 40px 32px;
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .step:hover {
+      border-color: rgba(201,168,76,0.5);
+      transform: translateY(-4px);
+    }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: rgba(201,168,76,0.12);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .step-text {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .step-icon {
+      position: absolute;
+      top: 36px;
+      right: 32px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    /* ─── LIFESTYLE SPLIT ─── */
+    .lifestyle { background: var(--navy); }
+    .lifestyle-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .lifestyle-img {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .lifestyle-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.9);
+    }
+    .lifestyle-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 130px;
+      height: 130px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      box-shadow: 0 12px 40px rgba(201,168,76,0.4);
+    }
+    .lifestyle-badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .lifestyle-badge-text {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-align: center;
+      padding: 0 12px;
+    }
+
+    .lifestyle-content {}
+    .features-list {
+      list-style: none;
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .feature-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .feature-icon {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+    .feature-text h4 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .feature-text p {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials { background: var(--navy-mid); }
+    .testimonials .section-inner { text-align: center; }
+    .testimonials .section-body { margin: 0 auto 56px; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      text-align: left;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 4px;
+      padding: 36px 28px;
+    }
+    .stars {
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+    .testimonial-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(201,168,76,0.3);
+    }
+    .author-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--white);
+      display: block;
+    }
+    .author-dest {
+      font-size: 0.75rem;
+      color: var(--gold);
+      display: block;
+    }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      position: relative;
+      overflow: hidden;
+      padding: 120px 48px;
+      text-align: center;
+    }
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1467226632440-65f0b4957563?w=1920&q=85');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.3) saturate(0.7);
+    }
+    .cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10,22,40,0.8), rgba(17,34,64,0.7));
+    }
+    .cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .cta-title em { font-style: italic; color: var(--gold-light); }
+    .cta-body {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-note {
+      margin-top: 24px;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      padding: 48px 48px 32px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 28px;
+    }
+    .footer-brand {}
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--gold-light);
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 14px;
+    }
+    .footer-logo span { color: var(--white); }
+    .footer-brand p {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .footer-col h5 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+    .footer-affiliate {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+    .footer-affiliate a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ─── FLOATING CTA ─── */
+    .floating-cta {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 200;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.4s, transform 0.4s;
+      pointer-events: none;
+    }
+    .floating-cta.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .floating-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 40px;
+      box-shadow: 0 8px 32px rgba(201,168,76,0.5), 0 2px 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .floating-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 48px rgba(201,168,76,0.6);
+    }
+
+    /* ─── GOLD DIVIDER ─── */
+    .gold-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .gold-divider-line {
+      height: 1px;
+      width: 48px;
+      background: var(--gold);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      section { padding: 72px 24px; }
+      .hero-content { padding: 0 24px 72px; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .dest-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .dest-card:first-child { grid-row: auto; }
+      .steps-grid { grid-template-columns: 1fr; gap: 24px; }
+      .lifestyle-inner { grid-template-columns: 1fr; gap: 48px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .floating-cta { bottom: 20px; right: 20px; }
+      .hero-scroll { display: none; }
+      .stats-bar { padding: 24px; }
+    }
+
+    @media (max-width: 560px) {
+      .hero-title { font-size: 2.6rem; }
+      .dest-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="#" class="nav-logo">Smart<span>Cruises</span></a>
+    <a href="https://jeka7ro.incruises.com/signup" target="_blank" rel="noopener" class="nav-cta" id="nav-join">
+      ✦ Înscrie-te Acum
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="gold-divider">
+        <div class="gold-divider-line"></div>
+      </div>
+      <span class="hero-eyebrow">✦ Clubul Exclusiv de Croaziere</span>
+      <h1 class="hero-title">
+        Lumea te<br/>
+        <em>așteaptă</em>
+      </h1>
+      <p class="hero-sub">
+        Croaziere de lux, hoteluri de top și tururi exclusiviste pe cele mai frumoase mări și continente ale lumii — la prețuri mult reduse față de cele de pe internet.
+      </p>
+      <div class="hero-actions">
+        <a href="https://jeka7ro.incruises.com/signup" target="_blank" rel="noopener" class="btn-primary" id="hero-cta">
+          ✦ Alătură-te Clubului
+        </a>
+        <a href="#destinations" class="btn-ghost">
+          Descoperă destinațiile →
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-number">250+</span>
+        <span class="stat-label">Destinații mondiale</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">50K+</span>
+        <span class="stat-label">Membri activi</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">40%</span>
+        <span class="stat-label">Economii medii</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">24/7</span>
+        <span class="stat-label">Suport dedicat</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESTINATIONS -->
+  <section class="destinations" id="destinations">
+    <div class="section-inner">
+      <div class="dest-header">
+        <div>
+          <p class="section-eyebrow">✦ Destinații de Vis</p>
+          <h2 class="section-title">Navighează spre<br/><em>minunile lumii</em></h2>
+        </div>
+        <p class="section-body">
+          De la fiordurile norvegiene la insulele tropicale ale Caraibelor — Smart Cruises îți deschide porțile celor mai spectaculoase destinații.
+        </p>
+      </div>
+
+      <div class="dest-grid">
+        <!-- Large card -->
+        <div class="dest-card">
+          <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=900&q=85" alt="Santorini, Grecia" loading="lazy" />
+          <div class="dest-overlay">
+            <div class="dest-info">
+              <span class="dest-region">Europa de Sud</span>
+              <span class="dest-name">Santorini,<br/>Grecia</span>
+            </div>
+          </div>
+        </div>
+        <!-- Small cards -->
+        <div class="dest-card">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80" alt="Caraibe" loading="lazy" />
+          <div class="dest-overlay">
+            <div class="dest-info">
+              <span class="dest-region">America Centrală</span>
+              <span class="dest-name">Caraibe</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img src="https://images.unsplash.com/photo-1491557345352-5929e343eb89?w=600&q=80" alt="Fiordurile Norvegiene" loading="lazy" />
+          <div class="dest-overlay">
+            <div class="dest-info">
+              <span class="dest-region">Europa de Nord</span>
+              <span class="dest-name">Fiorduri<br/>Norvegiene</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&q=80" alt="Maldive" loading="lazy" />
+          <div class="dest-overlay">
+            <div class="dest-info">
+              <span class="dest-region">Asia de Sud</span>
+              <span class="dest-name">Maldive</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&q=80" alt="Alaska" loading="lazy" />
+          <div class="dest-overlay">
+            <div class="dest-info">
+              <span class="dest-region">America de Nord</span>
+              <span class="dest-name">Alaska</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="section-inner">
+      <p class="section-eyebrow">✦ Cum Funcționează</p>
+      <h2 class="section-title">Simplu, elegant,<br/><em>extraordinar</em></h2>
+      <p class="section-body">Trei pași simpli te despart de vacanța vieții tale. Fără complicații, fără costuri ascunse.</p>
+
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-icon">⚓</div>
+          <h3 class="step-title">Devii Membru</h3>
+          <p class="step-text">Înregistrează-te în câteva minute. Plătești un abonament lunar care <strong>nu se pierde</strong> (ca la TV sau muzică), ci îți primești banii dublați în portofelul tău de vacanță.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-icon">🗺️</div>
+          <h3 class="step-title">Alegi Croaziera</h3>
+          <p class="step-text">Navighezi printre sute de rute și pachete de croazieră cu prețuri cu până la 40% mai mici decât pe piața liberă. Tu decizi când și unde.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-icon">🌊</div>
+          <h3 class="step-title">Navighezi în Lux</h3>
+          <p class="step-text">Urci la bord și te bucuri de tot ce o croazieră de 5 stele poate oferi — restaurant gourmet, divertisment, spa și destinații de neuitat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIFESTYLE SPLIT -->
+  <section class="lifestyle" id="about">
+    <div class="lifestyle-inner">
+      <div class="lifestyle-img">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=85" alt="Familie pe croazieră de lux" loading="lazy" />
+        <div class="lifestyle-badge">
+          <span class="lifestyle-badge-num">5★</span>
+          <span class="lifestyle-badge-text">Experiență Garantată</span>
+        </div>
+      </div>
+
+      <div class="lifestyle-content">
+        <p class="section-eyebrow">✦ De Ce Smart Cruises</p>
+        <h2 class="section-title">Mai mult decât<br/>o <em>vacanță</em></h2>
+        <p class="section-body">Smart Cruises nu este o simplă agenție de turism. Este un club exclusiv care îți oferă acces privilegiat la lumea croazierelor de lux, hotelurilor de top și tururilor globale — cu prețuri mult reduse pe care nu le vei obține pe site-urile publice de rezervări.</p>
+
+        <ul class="features-list">
+          <li class="feature-item">
+            <div class="feature-icon">💎</div>
+            <div class="feature-text">
+              <h4>Prețuri Exclusive de Membru</h4>
+              <p>Economii de 20–40% față de prețurile publice la cele mai bune companii de croazieră din lume.</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <div class="feature-icon">💰</div>
+            <div class="feature-text">
+              <h4>Banii tăi se dublează, nu se pierd</h4>
+              <p>Spre deosebire de un abonament la TV sau muzică unde banii dispar, aici tot ce investești lunar rămâne în Wallet-ul tău și <strong>se dublează</strong>. La 100$ depuși primești 200$, iar la 250$ primești 500$ pentru următoarea vacanță.</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <div class="feature-icon">🏨</div>
+            <div class="feature-text">
+              <h4>Hoteluri, Tururi și Croaziere</h4>
+              <p>Nu e vorba doar de croaziere. Ai acces la zeci de mii de hoteluri și resorturi de top, plus tururi globale la prețuri mult reduse față de marile site-uri de rezervări de pe net.</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <div class="feature-icon">🤝</div>
+            <div class="feature-text">
+              <h4>Comunitate și Oportunitate</h4>
+              <p>Invită prieteni și câștigă comisioane. Vacanțele tale se pot autofinanța și genera venituri pasive.</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-text">
+              <h4>Siguranță și Flexibilitate</h4>
+              <p>Rezervări flexibile, suport 24/7 și garanția celor mai bune prețuri — fără riscuri.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="reviews">
+    <div class="section-inner">
+      <p class="section-eyebrow">✦ Mărturii</p>
+      <h2 class="section-title">Ce spun <em>membrii noștri</em></h2>
+      <p class="section-body">Mii de români au descoperit deja lumea croazierelor prin Smart Cruises. Ascultă-i pe ei.</p>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-quote">"Nu am crezut că o croazieră în Mediterana poate fi la îndemâna noastră. Prin Smart Cruises am plătit mai puțin decât un all-inclusive obișnuit în Turcia — și experiența a fost incomparabilă."</p>
+          <div class="testimonial-author">
+            <img class="author-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana M." />
+            <div>
+              <span class="author-name">Ana M.</span>
+              <span class="author-dest">Croazieră Mediterana de Est</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-quote">"Îmi doream de ani de zile să văd Santorini din mare. Prin Smart Cruises am reușit — cu familia, la un preț pe care nu l-am găsit nicăieri altundeva. Recomand cu toată inima."</p>
+          <div class="testimonial-author">
+            <img class="author-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Bogdan T." />
+            <div>
+              <span class="author-name">Bogdan T.</span>
+              <span class="author-dest">Insulele Grecești</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-quote">"Am recuperat investiția în membership în prima săptămână după ce am recomandat clubul câtorva prieteni. Acum călătoresc mai mult ca oricând și câștig în același timp."</p>
+          <div class="testimonial-author">
+            <img class="author-avatar" src="https://randomuser.me/api/portraits/women/65.jpg" alt="Mihaela P." />
+            <div>
+              <span class="author-name">Mihaela P.</span>
+              <span class="author-dest">Caraibe — Royal Caribbean</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section" id="join">
+    <div class="cta-bg"></div>
+    <div class="cta-overlay"></div>
+    <div class="cta-content">
+      <p class="section-eyebrow" style="text-align:center; margin-bottom:16px;">✦ Pasul Următor</p>
+      <h2 class="cta-title">Ești gata să<br/><em>pornești la drum?</em></h2>
+      <p class="cta-body">
+        Mii de destinații îți așteaptă vizita. Înregistrarea durează sub 3 minute și accesul la prețurile exclusive este imediat. Nu amâna experiența vieții tale.
+      </p>
+      <div class="cta-actions">
+        <a href="https://jeka7ro.incruises.com/signup" target="_blank" rel="noopener" class="btn-primary" id="cta-main" style="font-size:0.9rem; padding:18px 48px;">
+          ✦ Înscrie-te Gratuit
+        </a>
+      </div>
+      <p class="cta-note">Fără angajamente ascunse &nbsp;·&nbsp; Suport în română &nbsp;·&nbsp; Prețuri garantate</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">Smart<span>Cruises</span></span>
+        <p>Clubul exclusiv de croaziere care îți deschide accesul la lumea navigației de lux, la prețuri de neuitat.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Destinații</h5>
+        <ul class="footer-links">
+          <li><a href="https://jeka7ro.incruises.com/signup" target="_blank">Mediterana</a></li>
+          <li><a href="https://jeka7ro.incruises.com/signup" target="_blank">Caraibe</a></li>
+          <li><a href="https://jeka7ro.incruises.com/signup" target="_blank">Europa de Nord</a></li>
+          <li><a href="https://jeka7ro.incruises.com/signup" target="_blank">Asia &amp; Pacific</a></li>
+          <li><a href="https://jeka7ro.incruises.com/signup" target="_blank">Alaska</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Club Smart Cruises</h5>
+        <ul class="footer-links">
+          <li><a href="https://jeka7ro.incruises.com/signup" target="_blank">Înregistrare</a></li>
+          <li><a href="#how">Cum funcționează</a></li>
+          <li><a href="#about">Beneficii</a></li>
+          <li><a href="#reviews">Testimoniale</a></li>
+          <li><a href="https://jeka7ro.incruises.com/signup" target="_blank">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Smart Cruises Romania. Toate drepturile rezervate.</p>
+      <p class="footer-affiliate">Link de afiliat: <a href="https://jeka7ro.incruises.com/signup" target="_blank">jeka7ro.incruises.com/signup</a></p>
+    </div>
+  </footer>
+
+  <!-- FLOATING CTA -->
+  <div class="floating-cta" id="floatingCta">
+    <a href="https://jeka7ro.incruises.com/signup" target="_blank" rel="noopener" class="floating-btn" id="floating-cta-btn">
+      ✦ Înscrie-te Acum
+    </a>
+  </div>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('mainNav');
+    const floating = document.getElementById('floatingCta');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+      if (window.scrollY > 400) {
+        floating.classList.add('visible');
+      } else {
+        floating.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    // Intersection observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.step, .dest-card, .testimonial-card, .feature-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
