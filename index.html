@@ -1321,16 +1321,30 @@
           btn.style.opacity = '0.7';
           btn.disabled = true;
           
-          let formData = new FormData(form);
-          fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString()
-          }).then(() => {
+          // GARANȚIE: Dacă fetch-ul crapă din cauza ad-blockerelor, redirecționează în 1.2 sec.
+          let fallback = setTimeout(() => {
             window.location.href = "https://jeka7ro.incruises.com/signup";
-          }).catch(() => {
-            window.location.href = "https://jeka7ro.incruises.com/signup";
-          });
+          }, 1200);
+
+          try {
+            let formData = new FormData(form);
+            let searchParams = new URLSearchParams();
+            for (const pair of formData) { searchParams.append(pair[0], pair[1]); }
+            
+            fetch("/", {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: searchParams.toString()
+            }).then(() => {
+              clearTimeout(fallback);
+              window.location.href = "https://jeka7ro.incruises.com/signup";
+            }).catch(() => {
+              clearTimeout(fallback);
+              window.location.href = "https://jeka7ro.incruises.com/signup";
+            });
+          } catch(err) {
+             // timer will catch it
+          }
         });
       }
     });
