@@ -942,6 +942,37 @@
     </div>
   </section>
 
+
+  <!-- PLATFORM ADVANTAGES -->
+  <section class="platform-advantages" style="padding: 80px 24px; background: rgba(0,0,0,0.2);">
+    <div class="container" style="max-width: 1000px; margin: 0 auto;">
+      <h2 class="section-title" style="text-align:center; font-family:'Cormorant Garamond', serif; font-size:2.8rem; color:var(--gold); margin-bottom: 20px;">Avantajele Platformei InCruises</h2>
+      <p style="text-align:center; color:#ccc; max-width:600px; margin:0 auto 60px; line-height:1.6; font-size:1.1rem;">Odată ce intri în club prin invitație, ai direct pe telefon aplicația VIP prin care îți rezervi mii de vacanțe fără intermediari.</p>
+      
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:24px;">
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:20px; padding:30px; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);">
+          <h3 style="color:#fff; font-size:1.3rem; margin-bottom:15px; display:flex; align-items:center; gap:10px;"><span style="color:var(--gold);">✦</span> 21.000+ Opțiuni</h3>
+          <p style="color:#aaa; font-size:0.95rem; line-height:1.6;">Alege din mii de itinerarii pe absolut toate mările lumii, plus zeci de mii de hoteluri fantastice.</p>
+        </div>
+        
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:20px; padding:30px; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);">
+          <h3 style="color:#fff; font-size:1.3rem; margin-bottom:15px; display:flex; align-items:center; gap:10px;"><span style="color:var(--gold);">✦</span> Fără Intermediari</h3>
+          <p style="color:#aaa; font-size:0.95rem; line-height:1.6;">Rezervi direct de pe telefon. Păstrezi comisionul perceput de agențiile de turism direct în buzunarul tău.</p>
+        </div>
+        
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:20px; padding:30px; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);">
+          <h3 style="color:#fff; font-size:1.3rem; margin-bottom:15px; display:flex; align-items:center; gap:10px;"><span style="color:var(--gold);">✦</span> Banii tăi sunt Garantați</h3>
+          <p style="color:#aaa; font-size:0.95rem; line-height:1.6;">Fondurile din portofelul tău sunt integral protejate internațional de organizația Trust My Travel (TMT).</p>
+        </div>
+        
+        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:20px; padding:30px; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);">
+          <h3 style="color:#fff; font-size:1.3rem; margin-bottom:15px; display:flex; align-items:center; gap:10px;"><span style="color:var(--gold);">✦</span> Răzgândire Gratuită 14 Zile</h3>
+          <p style="color:#aaa; font-size:0.95rem; line-height:1.6;">Garanție completă de refund în 14 zile. Nu-ți place sistemul din aplicație? Îți retragi banii imediat fără penalizări.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- DESTINATIONS -->
   <section class="destinations" id="destinations">
     <div class="section-inner">
@@ -1246,5 +1277,45 @@
       observer.observe(el);
     });
   </script>
+
+  <!-- MODAL INVITATION FORM -->
+  <div id="lead-modal" class="modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(10,22,40,0.85); backdrop-filter:blur(15px); -webkit-backdrop-filter:blur(15px); z-index:9999; justify-content:center; align-items:center;">
+    <div class="modal-content" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:40px; max-width:400px; width:90%; position:relative; box-shadow:0 20px 40px rgba(0,0,0,0.5);">
+      <button onclick="closeModal()" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.1); border:none; color:#fff; font-size:1.5rem; cursor:pointer; width:36px; height:36px; border-radius:18px; display:flex; align-items:center; justify-content:center; padding-bottom:4px;">&times;</button>
+      <h3 style="font-family:'Cormorant Garamond', serif; font-size:2rem; color:var(--gold); margin-bottom:10px; line-height:1.1;">Acces Exclusiv</h3>
+      <p style="color:#ccc; font-size:0.95rem; margin-bottom:24px; line-height:1.5;">Lasă-ne contactul tău pentru a primi imediat cadoul: <b style="color:#fff;">link-ul de acces VIP</b> în platformă, direct pe email sau SMS.</p>
+      
+      <form name="invitatie-ro" method="POST" action="/index.html?sent=true" data-netlify="true" autocomplete="off">
+        <input type="hidden" name="form-name" value="invitatie-ro" />
+        <input type="text" name="nume" placeholder="Nume (Opțional)" style="width:100%; padding:14px; margin-bottom:16px; border-radius:14px; border:1px solid rgba(255,255,255,0.15); background:rgba(0,0,0,0.3); color:#fff; box-sizing:border-box; font-size:1rem;" />
+        <input type="text" name="contact" placeholder="Email sau Telefon *" required style="width:100%; padding:14px; margin-bottom:24px; border-radius:14px; border:1px solid rgba(255,255,255,0.3); background:rgba(0,0,0,0.3); color:#fff; box-sizing:border-box; font-size:1rem;" />
+        <button type="submit" class="btn-primary" style="width:100%; border-radius:14px; border:none; cursor:pointer; font-weight:600; padding:16px; font-size:1rem;">Vreau Invitația Gratuită</button>
+      </form>
+      <p style="font-size:0.75rem; color:#777; margin-top:16px; text-align:center;">Promitem să nu trimitem Spam.<br/>Datele sunt securizate.</p>
+    </div>
+  </div>
+
+  <script>
+    function openModal(e) {
+      if(e) e.preventDefault();
+      document.getElementById('lead-modal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('lead-modal').style.display = 'none';
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      // Show form if sent=true
+      if(window.location.search.includes('sent=true')) {
+        alert("Cererea a fost trimisă cu succes! Vei primi link-ul în curând.");
+      }
+      // Intercept CTAs
+      const btns = document.querySelectorAll('a[href*="incruises.com/signup"]');
+      btns.forEach(btn => {
+        btn.addEventListener('click', openModal);
+      });
+    });
+  </script>
+
 </body>
 </html>
