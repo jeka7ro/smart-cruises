@@ -944,7 +944,7 @@
 
 
   <!-- PLATFORM ADVANTAGES -->
-  <section class="platform-advantages" style="padding: 80px 24px; background: rgba(0,0,0,0.2);">
+  <section class="platform-advantages" style="padding: 100px 24px; background: linear-gradient(180deg, rgba(8,18,34,1) 0%, rgba(20,45,70,1) 100%); box-shadow: 0 -20px 40px rgba(0,0,0,0.3); position:relative; z-index:10; border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold);">
     <div class="container" style="max-width: 1000px; margin: 0 auto;">
       <h2 class="section-title" style="text-align:center; font-family:'Cormorant Garamond', serif; font-size:2.8rem; color:var(--gold); margin-bottom: 20px;">Avantajele Platformei InCruises</h2>
       <p style="text-align:center; color:#ccc; max-width:600px; margin:0 auto 60px; line-height:1.6; font-size:1.1rem;">Odată ce intri în club prin invitație, ai direct pe telefon aplicația VIP prin care îți rezervi mii de vacanțe fără intermediari.</p>
@@ -1283,15 +1283,16 @@
     <div class="modal-content" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:40px; max-width:400px; width:90%; position:relative; box-shadow:0 20px 40px rgba(0,0,0,0.5);">
       <button onclick="closeModal()" style="position:absolute; top:20px; right:20px; background:rgba(255,255,255,0.1); border:none; color:#fff; font-size:1.5rem; cursor:pointer; width:36px; height:36px; border-radius:18px; display:flex; align-items:center; justify-content:center; padding-bottom:4px;">&times;</button>
       <h3 style="font-family:'Cormorant Garamond', serif; font-size:2rem; color:var(--gold); margin-bottom:10px; line-height:1.1;">Acces Exclusiv</h3>
-      <p style="color:#ccc; font-size:0.95rem; margin-bottom:24px; line-height:1.5;">Lasă-ne contactul tău pentru a primi imediat cadoul: <b style="color:#fff;">link-ul de acces VIP</b> în platformă, direct pe email sau SMS.</p>
+      <p style="color:#ccc; font-size:0.95rem; margin-bottom:24px; line-height:1.5;">Lasă-ne contactul tău pentru a debloca cadoul principal: <b style="color:#fff;">accesul VIP</b> global.</p>
       
-      <form name="invitatie-ro" method="POST" action="/index.html?sent=true" data-netlify="true" autocomplete="off">
+      <p style="color:#aaa; font-size:0.85rem; margin-bottom:20px; line-height:1.4; border-left: 3px solid var(--gold); padding-left:14px; font-style:italic;">Asigură-ți datele aici, iar pagina te va transfera automat către înregistrarea pe platforma oficială privată.</p>
+      <form id="invitatie-form-ro" name="invitatie-ro" data-netlify="true" autocomplete="off">
         <input type="hidden" name="form-name" value="invitatie-ro" />
         <input type="text" name="nume" placeholder="Nume (Opțional)" style="width:100%; padding:14px; margin-bottom:16px; border-radius:14px; border:1px solid rgba(255,255,255,0.15); background:rgba(0,0,0,0.3); color:#fff; box-sizing:border-box; font-size:1rem;" />
         <input type="text" name="contact" placeholder="Email sau Telefon *" required style="width:100%; padding:14px; margin-bottom:24px; border-radius:14px; border:1px solid rgba(255,255,255,0.3); background:rgba(0,0,0,0.3); color:#fff; box-sizing:border-box; font-size:1rem;" />
-        <button type="submit" class="btn-primary" style="width:100%; border-radius:14px; border:none; cursor:pointer; font-weight:600; padding:16px; font-size:1rem;">Vreau Invitația Gratuită</button>
+        <button type="submit" class="btn-primary" style="width:100%; border-radius:14px; border:none; cursor:pointer; font-weight:600; padding:16px; font-size:1.1rem; letter-spacing:0.5px; box-shadow:0 0 20px rgba(212,175,55,0.4);">Deblochează Accesul VIP</button>
       </form>
-      <p style="font-size:0.75rem; color:#777; margin-top:16px; text-align:center;">Promitem să nu trimitem Spam.<br/>Datele sunt securizate.</p>
+      <p style="font-size:0.75rem; color:#777; margin-top:20px; text-align:center;">Promitem zero spam. Datele sunt criptate.</p>
     </div>
   </div>
 
@@ -1305,15 +1306,30 @@
     }
     
     document.addEventListener('DOMContentLoaded', () => {
-      // Show form if sent=true
-      if(window.location.search.includes('sent=true')) {
-        alert("Cererea a fost trimisă cu succes! Vei primi link-ul în curând.");
-      }
-      // Intercept CTAs
       const btns = document.querySelectorAll('a[href*="incruises.com/signup"]');
-      btns.forEach(btn => {
-        btn.addEventListener('click', openModal);
-      });
+      btns.forEach(btn => btn.addEventListener('click', openModal));
+      
+      const form = document.getElementById("invitatie-form-ro");
+      if(form) {
+        form.addEventListener("submit", function(e) {
+          e.preventDefault();
+          let btn = form.querySelector('button[type="submit"]');
+          btn.innerHTML = 'Se redirecționează... ⏳';
+          btn.style.opacity = '0.7';
+          btn.disabled = true;
+          
+          let formData = new FormData(form);
+          fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
+          }).then(() => {
+            window.location.href = "https://jeka7ro.incruises.com/signup";
+          }).catch(() => {
+            window.location.href = "https://jeka7ro.incruises.com/signup";
+          });
+        });
+      }
     });
   </script>
 
