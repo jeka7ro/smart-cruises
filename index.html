@@ -749,10 +749,27 @@
       background: var(--gold);
     }
 
+    /* ─── WALLET EXPLANATION ─── */
+    .wallet { background: var(--navy-light); padding: 96px 48px; }
+    .wallet-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; }
+    .wallet-text { max-width: 600px; }
+    .wallet-plans { display: flex; flex-direction: column; gap: 24px; margin-top: 40px; }
+    .wallet-plan { background: rgba(10,22,40,0.6); border-left: 3px solid var(--gold); padding: 28px; border-radius: 0 4px 4px 0; }
+    .wallet-plan.premium-plan { border-left-color: #e8c97a; background: linear-gradient(to right, rgba(201,168,76,0.08), rgba(10,22,40,0.6)); }
+    .wallet-plan h5 { font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .wallet-math { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .math-pay { font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--text-muted); opacity:0.8; }
+    .math-arrow { color: var(--gold-light); font-size: 1.4rem; }
+    .math-get { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; color: #fff; font-weight: 400; line-height:1; }
+    .wallet-plan p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
+    .wallet-image img { border-radius: 4px; box-shadow: 0 24px 64px rgba(0,0,0,0.4); width: 100%; border: 1px solid rgba(201,168,76,0.15); }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       nav { padding: 16px 24px; }
       section { padding: 72px 24px; }
+      .wallet { padding: 72px 24px; }
+      .wallet-grid { grid-template-columns: 1fr; gap: 48px; }
       .hero-content { padding: 0 24px 72px; }
       .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 32px; }
       .dest-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
@@ -926,6 +943,52 @@
           <div class="step-icon">🌊</div>
           <h3 class="step-title">Navighezi în Lux</h3>
           <p class="step-text">Urci la bord și te bucuri de tot ce o croazieră de 5 stele poate oferi — restaurant gourmet, divertisment, spa și destinații de neuitat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE WALLET EXPLANATION -->
+  <section class="wallet" id="wallet-explanation">
+    <div class="section-inner">
+      <div class="wallet-grid">
+        <div class="wallet-text">
+          <p class="section-eyebrow">✦ Secretul Economiei Tale</p>
+          <h2 class="section-title">Banii tăi se <em>dublează</em> și devin vacanțe</h2>
+          <p class="section-body">
+            Spre deosebire de abonamentele TV sau la muzică, unde banii sunt cheltuiți definitiv lună de lună, aici, suma pe care o achiți se comportă ca un cont de economii. Întreaga valoare se transformă în <strong>Reward Points</strong> (Puncte de Recompensă) dublate direct în <em>Wallet-ul</em> tău InCruises.
+          </p>
+          
+          <div class="wallet-plans">
+            <div class="wallet-plan">
+              <h5>Planul Classic</h5>
+              <div class="wallet-math">
+                <span class="math-pay">Suma lunară<br>100$</span>
+                <span class="math-arrow">➔</span>
+                <span class="math-get">200$</span>
+              </div>
+              <p>În 12 luni, pui deoparte 1.200$, dar în portofelul tău vei avea <strong>2.400$ Reward Points</strong>, pregătiți să acopere costul oricărei croaziere din sistem.</p>
+            </div>
+            
+            <div class="wallet-plan premium-plan">
+              <h5>Abonamentul Premium</h5>
+              <div class="wallet-math">
+                <span class="math-pay">Suma lunară<br>250$</span>
+                <span class="math-arrow">➔</span>
+                <span class="math-get">500$</span>
+              </div>
+              <p>Acumulezi extrem de rapid! Cu acești bani dublați cumperi vacanțe mult mai ieftine, rezervând croaziere, hoteluri și resorturi de top.</p>
+            </div>
+          </div>
+          
+          <p class="section-body" style="margin-top:32px; color:var(--gold-light); font-weight: 400; font-size: 1.05rem;">
+            Banii tăi personali dublați de InCruises nu expiră niciodată. Cu ei îți vei plăti cele mai luxoase hoteluri și croaziere la fracțiune din preț!
+          </p>
+        </div>
+        
+        <div class="wallet-image">
+          <!-- O imagine de înaltă calitate reprezentând o destinație luxoasă sau portofel / economii / card de membru -->
+          <img src="https://images.unsplash.com/photo-1544465544-1b71aee9dfa3?w=800&q=85" alt="Economii și vacanțe de lux" loading="lazy" />
         </div>
       </div>
     </div>
