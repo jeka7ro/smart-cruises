@@ -1288,14 +1288,26 @@
       <h3 style="font-family:'Cormorant Garamond', serif; font-size:2rem; color:var(--gold); margin-bottom:10px; line-height:1.1;">Acces Exclusiv</h3>
       <p style="color:#ccc; font-size:0.95rem; margin-bottom:24px; line-height:1.5;">Lasă-ne contactul tău pentru a debloca cadoul principal: <b style="color:#fff;">accesul VIP</b> global.</p>
       
-      <p style="color:#aaa; font-size:0.85rem; margin-bottom:20px; line-height:1.4; border-left: 3px solid var(--gold); padding-left:14px; font-style:italic;">Asigură-ți datele aici, iar pagina te va transfera automat către înregistrarea pe platforma oficială privată.</p>
       <form id="invitatie-form-ro" name="invitatie-ro" data-netlify="true" autocomplete="off">
         <input type="hidden" name="form-name" value="invitatie-ro" />
+        
+        <p style="color:#ccc; font-size:0.9rem; margin-bottom:16px;">Cum preferi să primești accesul?</p>
+        <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:24px; background:rgba(0,0,0,0.2); padding:16px; border-radius:14px; border:1px solid rgba(255,255,255,0.1);">
+          <label style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:10px; cursor:pointer;">
+            <input type="radio" name="preferinta_acces" value="direct" checked style="accent-color:var(--gold); width:18px; height:18px; cursor:pointer;" />
+            Redirecționați-mă <b style="color:var(--gold);">ACUM</b> spre platforma oficială
+          </label>
+          <label style="color:#fff; font-size:0.95rem; display:flex; align-items:center; gap:10px; cursor:pointer; margin-top:6px;">
+            <input type="radio" name="preferinta_acces" value="email" style="accent-color:var(--gold); width:18px; height:18px; cursor:pointer;" />
+            Trimiteți-mi link-ul mai târziu pe Email / Mesaj
+          </label>
+        </div>
+
         <input type="text" name="nume" placeholder="Nume (Opțional)" style="width:100%; padding:14px; margin-bottom:16px; border-radius:14px; border:1px solid rgba(255,255,255,0.15); background:rgba(0,0,0,0.3); color:#fff; box-sizing:border-box; font-size:1rem;" />
-        <input type="text" name="contact" placeholder="Email sau Telefon *" required style="width:100%; padding:14px; margin-bottom:24px; border-radius:14px; border:1px solid rgba(255,255,255,0.3); background:rgba(0,0,0,0.3); color:#fff; box-sizing:border-box; font-size:1rem;" />
+        <input type="text" name="contact" placeholder="Adresa de Email sau Telefon *" required style="width:100%; padding:14px; margin-bottom:24px; border-radius:14px; border:1px solid rgba(255,255,255,0.3); background:rgba(0,0,0,0.3); color:#fff; box-sizing:border-box; font-size:1rem;" />
         <button type="submit" class="btn-primary" style="width:100%; border-radius:14px; border:none; cursor:pointer; font-weight:600; padding:16px; font-size:1.1rem; letter-spacing:0.5px; box-shadow:0 0 20px rgba(212,175,55,0.4);">Deblochează Accesul VIP</button>
       </form>
-      <p style="font-size:0.75rem; color:#777; margin-top:20px; text-align:center;">Promitem zero spam. Datele sunt criptate.</p>
+      <p style="font-size:0.75rem; color:#777; margin-top:20px; text-align:center;">Promitem zero spam. Datele sunt complet criptate.</p>
     </div>
   </div>
 
@@ -1317,13 +1329,15 @@
         form.addEventListener("submit", function(e) {
           e.preventDefault();
           let btn = form.querySelector('button[type="submit"]');
-          btn.innerHTML = 'Se redirecționează... ⏳';
+          let pref = form.querySelector('input[name="preferinta_acces"]:checked').value;
+          
+          btn.innerHTML = 'Se procesează... ⏳';
           btn.style.opacity = '0.7';
           btn.disabled = true;
           
-          // GARANȚIE: Dacă fetch-ul crapă din cauza ad-blockerelor, redirecționează în 1.2 sec.
           let fallback = setTimeout(() => {
-            window.location.href = "https://jeka7ro.incruises.com/signup";
+            if(pref === 'direct') { window.location.href = "https://jeka7ro.incruises.com/signup"; }
+            else { alert("Cererea a fost înregistrată! Te vom contacta în scurt timp cu link-ul oficial."); btn.innerHTML = "Trimis cu Succes ✓"; closeModal(); }
           }, 1200);
 
           try {
@@ -1337,10 +1351,12 @@
               body: searchParams.toString()
             }).then(() => {
               clearTimeout(fallback);
-              window.location.href = "https://jeka7ro.incruises.com/signup";
+              if(pref === 'direct') { window.location.href = "https://jeka7ro.incruises.com/signup"; }
+              else { alert("Cererea a fost înregistrată! Te vom contacta în scurt timp cu link-ul oficial."); btn.innerHTML = "Trimis cu Succes ✓"; closeModal(); }
             }).catch(() => {
               clearTimeout(fallback);
-              window.location.href = "https://jeka7ro.incruises.com/signup";
+              if(pref === 'direct') { window.location.href = "https://jeka7ro.incruises.com/signup"; }
+              else { alert("Cererea a fost înregistrată! Te vom contacta în scurt timp cu link-ul oficial."); btn.innerHTML = "Trimis cu Succes ✓"; closeModal(); }
             });
           } catch(err) {
              // timer will catch it
